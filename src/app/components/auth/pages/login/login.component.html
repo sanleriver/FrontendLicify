@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="starter-template">
+    <div class="d-flex justify-content-center h-100">
+      <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img src="./../../../../assets/login.png" id="icon" alt="User Icon" />
+
+          </div>
+
+          <!-- Login Form -->
+          <form [formGroup]="form" (ngSubmit)="onLogin()" novalidate>
+            <input type="text" class="form-control fadeIn.first" placeholder="Usuario" formControlName="email" autocomplete="off"
+              [ngClass]="{'is-invalid': submitted && form.controls['email'].errors?.email}">
+            <div *ngIf="submitted && form.controls['email'].errors?.email" class="invalid-feedback">
+              <div *ngIf="form.controls['email'].errors?.email">Email invalido</div>
+            </div>
+
+            <input type="password" class="fadeIn.first" placeholder="Contraseña"
+              formControlName="password" autocomplete="off"
+              [ngClass]="{ 'is-invalid': submitted && form.controls['password'].hasError('minlength') }" />
+            <div *ngIf="submitted && form.controls['password'].hasError('minlength')" class="invalid-feedback">
+              <div *ngIf="form.controls['password'].errors.required">Password is required</div>
+              <div *ngIf="form.controls['password'].hasError('minlength')">Contraseña mayor a 6 caracteres</div>
+            </div>
+            <input type="submit" class="fadeIn fourth" [disabled]="!form.valid" value="Ingresar">
+          </form>
+
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+
+            <div *ngIf="form.valid && isLoginFail" class="alert alert-danger mt-3">Error al Iniciar
+              sesión: {{ errorMsg }}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
